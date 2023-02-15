@@ -11,7 +11,6 @@ public class Main {
             System.out.println("-----------------------------------------------");
             System.out.println("| 1. 입력 | 2. 검색 | 3. 출력 | 4. 삭제 | 5. 종료 |");
             System.out.println("-----------------------------------------------");
-
             try {
                 System.out.printf("값을 입력해주세요 : ");
                 num = sc.nextInt();
@@ -24,6 +23,8 @@ public class Main {
 
             switch (num) {
                 case 1 :
+                    System.out.println("입력을 선택하셨습니다.");
+                    System.out.println();
                     break;
                 case 2 :
                     break;

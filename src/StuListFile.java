@@ -1,5 +1,5 @@
 
-public class stuListFile {
+public class StuListFile {
 
     private final int id;
     private final String name;
@@ -7,7 +7,7 @@ public class stuListFile {
     private final int eScore;
     private final int mScore;
 
-    public stuListFile(int id, String name, int kScore, int eScore, int mScore) {
+    public StuListFile(int id, String name, int kScore, int eScore, int mScore) {
         this.id = id;
         this.name = name;
         this.kScore = kScore;
