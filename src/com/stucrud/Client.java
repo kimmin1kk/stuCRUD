@@ -1,7 +1,14 @@
-import java.util.*;
-public class Main {
-    public static void main(String[] args) throws Exception {
+package com.stucrud;
+import com.stucrud.function.StudentManager;
+import com.stucrud.function.StudentManagerImpl;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Client {
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
+        StudentManager sm = new StudentManagerImpl();
         int num=0;
         boolean onOff= true;
 
@@ -24,13 +31,16 @@ public class Main {
             switch (num) {
                 case 1 :
                     System.out.println("입력을 선택하셨습니다.");
-                    System.out.println();
+                    sm.typeStudent();
                     break;
                 case 2 :
+                    sm.searchStudent();
                     break;
                 case 3 :
+                    sm.printStudent();
                     break;
                 case 4 :
+                    sm.deleteStudent();
                     break;
                 case 5 :
                     onOff=false;
@@ -39,9 +49,7 @@ public class Main {
                 default :
                     sc = new Scanner(System.in);
                     System.out.println("1~5사이의 값을 입력해주세요.");
-
-
-
+                    break;
             }
 
         }
