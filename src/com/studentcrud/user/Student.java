@@ -1,4 +1,4 @@
-package com.stucrud.students;
+package com.studentcrud.user;
 
 public class Student { //오직 데이터만을 담고있다.
     private String name;

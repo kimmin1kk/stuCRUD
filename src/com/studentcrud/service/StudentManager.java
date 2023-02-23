@@ -1,4 +1,4 @@
-package com.stucrud.function;
+package com.studentcrud.service;
 
 public interface StudentManager {
     public void typeStudent();

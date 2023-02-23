@@ -1,6 +1,6 @@
-package com.stucrud;
-import com.stucrud.function.StudentManager;
-import com.stucrud.function.StudentManagerImpl;
+package com.studentcrud;
+import com.studentcrud.service.StudentManager;
+import com.studentcrud.service.StudentManagerImpl;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class Client {
         int num=0;
         boolean onOff= true;
 
-        while(onOff==true) {
+        while(onOff) {
             System.out.println("-----------------");
             System.out.println("| 학생 관리 시스템 |");
             System.out.println("-----------------------------------------------");

@@ -1,11 +1,9 @@
-package com.stucrud.function;
+package com.studentcrud.service;
 
 import java.util.*;
-import java.util.Iterator;
 
 
-
-import com.stucrud.students.Student;
+import com.studentcrud.user.Student;
 public class StudentManagerImpl implements StudentManager{ //여기에 기능들을 넣을 예정
     //기능은 입력, 검색, 출력, 삭제가 있음
 
