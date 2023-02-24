@@ -1,7 +1,8 @@
 package com.studentcrud.user;
 
-public interface User {
-
-
+public class User {
+    String id;
+    int password;
+    boolean adminAccess;
 
 }

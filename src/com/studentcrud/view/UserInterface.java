@@ -1,11 +1,13 @@
 package com.studentcrud.view;
 
 import com.studentcrud.service.StudentManager;
+import com.studentcrud.user.Student;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
+    Student stu = new Student();
 
     public void student_login(){
         System.out.println("학번을 입력하세요");
@@ -43,7 +45,7 @@ public class UserInterface {
                 case 2 :
                     System.out.println("로그아웃합니다.");
                     System.out.println("로그인 페이지로 넘어갑니다.");
-                    cl.login();
+                    cl.run();
                     break;
                 case 3 :
                     onOff=false;
@@ -103,7 +105,7 @@ public class UserInterface {
             switch (num) {
                 case 1 :
                     System.out.println("입력을 선택하셨습니다.");
-                    sm.typeStudent();
+                    sm.inputStudent(stu);
                     break;
                 case 2 :
                     sm.searchStudent();
@@ -117,7 +119,7 @@ public class UserInterface {
                 case 5 :
                     System.out.println("로그아웃합니다.");
                     System.out.println("로그인 페이지로 넘어갑니다.");
-                    cl.login();
+                    cl.run();
                 case 6 :
                     onOff=false;
                     System.out.println("학생 관리 시스템을 종료합니다.");
@@ -128,8 +130,49 @@ public class UserInterface {
                     break;
             }
         }
-
-
-
+    }
+    public Student typeStudent() {
+        Student student = new Student();
+        String name=null;
+        int id=0, kScore=0, eScore=0, mScore=0;
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("이름을 입력하세요 :");
+        student.setName(sc.nextLine());
+        System.out.printf("학번을 입력하세요 :");
+        student.setId(Integer.parseInt(sc.nextLine()));
+        System.out.println("국어 점수를 입력하세요 :");
+        student.setkScore(scoreInput(kScore));
+        System.out.println("영어 점수를 입력하세요 :");
+        student.seteScore(scoreInput(eScore));
+        System.out.println("수학 점수를 입력하세요");
+        student.setmScore(scoreInput(mScore));
+        return student;
+    };
+    public int scoreInput(int a) {
+        Scanner sc = new Scanner(System.in);
+        boolean onOff = true;
+        while(onOff) {
+            try {
+                a = sc.nextInt();
+            }
+            catch (InputMismatchException e) {
+                sc = new Scanner(System.in);
+                System.out.println("정수형만 입력할 수 있습니다.");
+                System.out.printf("입력 : ");
+                continue;
+            }
+            if(a < 0) {
+                System.out.println("최저 점수는 0점입니다. 다시 입력해주세요");
+                System.out.printf("입력 : ");
+                sc = new Scanner(System.in);
+            }else if(a > 100) {
+                System.out.println("최대 점수는 100점입니다. 다시 입력해주세요");
+                System.out.println("입력 : ");
+                sc = new Scanner(System.in);
+            }else {
+                break;
+            }
+        }
+        return a;
     }
 }
