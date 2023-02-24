@@ -1,57 +1,31 @@
 package com.studentcrud;
 import com.studentcrud.service.StudentManager;
 import com.studentcrud.service.StudentManagerImpl;
+import com.studentcrud.user.Administrator;
+import com.studentcrud.user.Student;
+import com.studentcrud.user.User;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Client {
 
-    public void run() {
+    public void login() { //이후 접속시 -> ArrayList에 학번이 있다면 1이 가능하게
         Scanner sc = new Scanner(System.in);
-        StudentManager sm = new StudentManagerImpl();
-        int num=0;
-        boolean onOff= true;
-
-        while(onOff) {
-            System.out.println("-----------------");
-            System.out.println("| 학생 관리 시스템 |");
-            System.out.println("-----------------------------------------------");
-            System.out.println("| 1. 입력 | 2. 검색 | 3. 출력 | 4. 삭제 | 5. 종료 |");
-            System.out.println("-----------------------------------------------");
-            try {
-                System.out.printf("값을 입력해주세요 : ");
-                num = sc.nextInt();
-            }
-            catch (InputMismatchException e) {
-                sc = new Scanner(System.in);
-                System.out.println("정수형만 입력할 수 있습니다.");
-                continue;
-            }
-
-            switch (num) {
-                case 1 :
-                    System.out.println("입력을 선택하셨습니다.");
-                    sm.typeStudent();
-                    break;
-                case 2 :
-                    sm.searchStudent();
-                    break;
-                case 3 :
-                    sm.printStudent();
-                    break;
-                case 4 :
-                    sm.deleteStudent();
-                    break;
-                case 5 :
-                    onOff=false;
-                    System.out.println("학생 관리 시스템을 종료합니다.");
-                    break;
-                default :
-                    sc = new Scanner(System.in);
-                    System.out.println("1~5사이의 값을 입력해주세요.");
-                    break;
-            }
-
+        User ad = new Administrator();
+        User st = new Student();
+        int choose = 0, num = 0;
+        System.out.println("로그인 페이지입니다.");
+        System.out.println("1. 학생 로그인 | 2. 관리자 로그인");
+        choose = Integer.parseInt(sc.nextLine());
+        switch (choose) {
+            case 1: //여기서 학번을 비교해야함 학번 비교해서 맞으면 student_login();으로 넘어가게
+                st.login();
+                break;
+            case 2:
+                ad.login();
+                break;
         }
     }
+
 }
