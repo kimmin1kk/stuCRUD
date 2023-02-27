@@ -2,7 +2,9 @@ package com.studentcrud.view;
 
 import com.studentcrud.service.StudentManager;
 import com.studentcrud.user.Student;
+import com.sun.istack.internal.NotNull;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -59,7 +61,7 @@ public class UserInterface {
         }
     }
 
-    public void admin_login(){
+    public void adminLogin(){
         Scanner sc = new Scanner(System.in);
         String check = null;
         System.out.println("관리자 비밀번호를 입력해주세요. 취소하려면 cancel을 입력해주세요.");
@@ -68,7 +70,7 @@ public class UserInterface {
             check = sc.nextLine();
             if(check.equals("admin1234")) {
                 System.out.println("관리자로 로그인합니다.");
-                admin_mainPage();
+                adminMainPage();
                 break;
             } else if (check.equals("cancel")) {
                 System.out.println("이전 페이지로 넘어갑니다");
@@ -79,7 +81,7 @@ public class UserInterface {
             }
         }
     }
-    public void admin_mainPage() {
+    public void adminMainPage() {
         Scanner sc = new Scanner(System.in);
         StudentManager sm = new StudentManager();
         Client cl = new Client();
@@ -131,7 +133,7 @@ public class UserInterface {
             }
         }
     }
-    public Student typeStudent() {
+    public Student typeStudent() { //학생 데이터 입력받는 메소드
         Student student = new Student();
         String name=null;
         int id=0, kScore=0, eScore=0, mScore=0;
@@ -139,7 +141,8 @@ public class UserInterface {
         System.out.printf("이름을 입력하세요 :");
         student.setName(sc.nextLine());
         System.out.printf("학번을 입력하세요 :");
-        student.setId(Integer.parseInt(sc.nextLine()));
+        student.setId(onlyInputNumber());
+//        student.setId(Integer.parseInt(sc.nextLine()));
         System.out.println("국어 점수를 입력하세요 :");
         student.setkScore(scoreInput(kScore));
         System.out.println("영어 점수를 입력하세요 :");
@@ -148,7 +151,7 @@ public class UserInterface {
         student.setmScore(scoreInput(mScore));
         return student;
     };
-    public int scoreInput(int a) {
+    public int scoreInput(int a) { //점수 입력할 때 예외처리해둔 메소드
         Scanner sc = new Scanner(System.in);
         boolean onOff = true;
         while(onOff) {
@@ -175,4 +178,57 @@ public class UserInterface {
         }
         return a;
     }
+
+    public int onlyInputNumber() {
+        int a=0;
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            try {
+                a = Integer.parseInt(sc.nextLine());
+//                a = sc.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("숫자만 입력하세요. (InputMismatchException 에러 발생");
+                System.out.printf("입력 : ");
+                sc = new Scanner(System.in);
+                continue;
+            }catch(NumberFormatException e){
+                System.out.println("숫자만 입력하세요. (NumberFormatException 에러 발생)");
+                System.out.printf("입력 : ");
+                sc = new Scanner(System.in);
+                continue;
+            }
+                if (a < 0) {
+                System.out.println("잘못된 접근입니다.");
+                System.out.printf("다시 입력 : ");
+                sc = new Scanner(System.in);
+            }else {
+                break;
+            }
+        }
+        return a;
+    }
+
+
+    public void printStudent(Student student) {
+        System.out.println(makeStudentInfo(student));
+    }
+
+    public String makeStudentInfo(Student student){
+        return "|이름 :" + student.getName() + " \t\t| 학번 :" + student.getId() + "\t\t| 국어:" + student.getkScore()+ " \t| 영어:" + student.geteScore()
+                + "\t| 수학:" + student.getmScore()+ "\t| 총점:" + (student.getkScore() + student.geteScore() + student.getmScore())+ "\t" +
+                "| 평균 :" + (student.getkScore() + student.geteScore() + student.getmScore()) / 3;
+    }
+
+    public int findStudent() {
+        int check=0;
+        System.out.print("학번을 입력해주세요 : ");
+        check = onlyInputNumber();
+
+        return check;
+    }
+
+    public void searchFailed(int search) {
+        System.out.printf("학번 : %d와 일치하는 항목이 존재하지 않습니다.\n" , search);
+    }
+
 }
