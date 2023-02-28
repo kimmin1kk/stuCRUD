@@ -6,13 +6,16 @@ public class Student extends User{ //오직 데이터만을 담고있다.
     private int kScore;
     private int eScore;
     private int mScore;
-    private int pw = id;
+    private String pw;
+
     public Student(String name, int id, int kScore, int eScore, int mScore) {
         this.name = name;
         this.id = id;
         this.kScore = kScore;
         this. eScore = eScore;
         this.mScore = mScore;
+//        this.pw = Integer.toString(id);
+        this.pw = String.valueOf(id);
     }
     public Student() { //오버로딩
 
@@ -38,14 +41,10 @@ public class Student extends User{ //오직 데이터만을 담고있다.
         return mScore;
     }
 
-    public int getPw() {return pw;}
+    public String getPw() {return pw;}
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setkScore(int kScore) {

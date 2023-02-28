@@ -25,7 +25,7 @@ public class StudentManager { //학생관리와 관련된 기능
         UserInterface ui = new UserInterface();
         list.add(ui.typeStudent());
     }
-    public void searchStudent() {
+    public void searchStudent() { //검색할 때 쓰는거
         UserInterface ui = new UserInterface();
         int search = ui.findStudent();
         Student findedStudent = null;
@@ -40,7 +40,7 @@ public class StudentManager { //학생관리와 관련된 기능
             ui.searchFailed(search);
         }
     }
-    public boolean studentExistenceTest (int id) { //중복 있으면 true 없으면 false 반환
+    public boolean studentExistenceTest (int id) { //중복 있으면 true 없으면 false 반환 입력할 때 쓰는 중
         Student findedStudent = null;
         for(Student std : list) {
             if(id == std.getId()) {
@@ -53,22 +53,24 @@ public class StudentManager { //학생관리와 관련된 기능
             return false;
         }
     }
-    public boolean studentLogin(int id,String pw) {
+    public boolean studentLogin(int id,String pw) { //입력 받은 인자로 로그인 하는 과정임
         Student findedStudent = null;
         for(Student std : list) {
-            if(id==std.getId()) {
+            if(id==std.getId()) { //아이디 체크
                 findedStudent = std;
+            }
+        }
+        if(findedStudent == null) {
+            return false;
+        }else {
+            if (pw.equals(findedStudent.getPw())) {
+            return true;
             }else {
                 return false;
             }
         }
-        if (pw.equals(findedStudent.getPw())) {
-        return true;
-        }else {
-            return false;
-        }
     }
-    public void deleteStudent() {
+    public void deleteStudent() { //삭제
         UserInterface ui = new UserInterface();
         int search = ui.findStudent(); int cnt = 0;
         for (Student std : list) {

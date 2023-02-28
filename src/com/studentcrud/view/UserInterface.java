@@ -159,13 +159,15 @@ public class UserInterface {
         return num;
     }
     public Student typeStudent() { //학생 데이터 입력받는 메소드
-        Student student = new Student();
+//        Student student = new Student();
         StudentManager sm = StudentManager.getInstance();
         Scanner sc = new Scanner(System.in);
-        int id = 0;
+        String name;
+        int id, kScore, eScore, mScore;
+
 
         System.out.print("이름을 입력하세요 :");
-        student.setName(sc.nextLine());
+        name = sc.nextLine();
         while(true) {
             System.out.print("학번을 입력하세요 :");
             id = getInput();
@@ -177,14 +179,14 @@ public class UserInterface {
                 break;
             }
         }
-        student.setId(id);
         System.out.print("국어 점수를 입력하세요 :");
-        student.setkScore(getScore());
+        kScore = getScore();
         System.out.print("영어 점수를 입력하세요 :");
-        student.seteScore(getScore());
+        eScore = getScore();
         System.out.print("수학 점수를 입력하세요");
-        student.setmScore(getScore());
+        mScore = getScore();
         System.out.println("학생이 생성되었습니다. 초기 비밀번호는 학번과 동일합니다.");
+        Student student = new Student(name, id, kScore, eScore, mScore);
         return student;
     };
 

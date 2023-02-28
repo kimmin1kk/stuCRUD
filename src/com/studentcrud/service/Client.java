@@ -15,24 +15,28 @@ public class Client {
         int id = 0; String pw = null;
         switch (ui.loginPage()) {
             case 1: // 학생 로그인
-                switch(ui.studentLogin()) {
-                    case 1: //로그인 성공
-                        studentMainPage();
-                        break;
-                    case 2: //로그인 실패
-                        run();
-                        break;
-                }
-
-//                if(sm.studentLogin(id, pw)) {
-//                    studentMainPage();
-//                    break;
-//                }else {
-//                    break;
+                id = ui.inputId();
+                pw = ui.inputPw();
+//                switch(ui.studentLogin()) {
+//                    case 1: //로그인 성공
+//                        studentMainPage();
+//                        break;
+//                    case 2: //로그인 실패
+//                        run();
+//                        break;
 //                }
 
-                ui.studentLogin();
-                break;
+                if(sm.studentLogin(id, pw)) { //로그인 성공
+                    studentMainPage();
+                    break;
+                }else { //로그인 실패
+                    System.out.println("로그인 실패");
+                    run();
+                    break;
+                }
+
+//                ui.studentLogin();
+//                break;
             case 2: // 어드민 로그인
                 switch(ui.adminLogin()) {
                     case 1: // 로그인 성공
