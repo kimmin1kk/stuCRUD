@@ -6,6 +6,7 @@ public class Student extends User{ //오직 데이터만을 담고있다.
     private int kScore;
     private int eScore;
     private int mScore;
+    private int pw = id;
     public Student(String name, int id, int kScore, int eScore, int mScore) {
         this.name = name;
         this.id = id;
@@ -36,6 +37,8 @@ public class Student extends User{ //오직 데이터만을 담고있다.
     public int getmScore() {
         return mScore;
     }
+
+    public int getPw() {return pw;}
 
     public void setName(String name) {
         this.name = name;

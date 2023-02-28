@@ -20,8 +20,6 @@ public class StudentManager { //학생관리와 관련된 기능
         }
         return studentManager;
     }
-
-
     ArrayList<Student> list = new ArrayList<>();
     public void inputStudent(Student student) {
         UserInterface ui = new UserInterface();
@@ -40,6 +38,34 @@ public class StudentManager { //학생관리와 관련된 기능
             ui.printStudent(findedStudent);
         }else {
             ui.searchFailed(search);
+        }
+    }
+    public boolean studentExistenceTest (int id) { //중복 있으면 true 없으면 false 반환
+        Student findedStudent = null;
+        for(Student std : list) {
+            if(id == std.getId()) {
+                findedStudent = std;
+            }
+        }
+        if(findedStudent instanceof Student) { 
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public boolean studentLogin(int id,String pw) {
+        Student findedStudent = null;
+        for(Student std : list) {
+            if(id==std.getId()) {
+                findedStudent = std;
+            }else {
+                return false;
+            }
+        }
+        if (pw.equals(findedStudent.getPw())) {
+        return true;
+        }else {
+            return false;
         }
     }
     public void deleteStudent() {
