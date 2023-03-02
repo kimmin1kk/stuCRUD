@@ -18,7 +18,10 @@ public class Student extends User{ //오직 데이터만을 담고있다.
         this.pw = String.valueOf(id);
     }
     public Student() { //오버로딩
+    }
 
+    public void setPw(String pw) {
+        this.pw = pw;
     }
 
     public String getName() {

@@ -21,6 +21,7 @@ public class StudentManager { //학생관리와 관련된 기능
         return studentManager;
     }
     ArrayList<Student> list = new ArrayList<>();
+    Student stu = new Student();
     public void inputStudent(Student student) {
         UserInterface ui = new UserInterface();
         list.add(ui.typeStudent());
@@ -86,8 +87,19 @@ public class StudentManager { //학생관리와 관련된 기능
         for(Student std : list) {
             ui.printStudent(std);
         }
-
     }
+    public int findIndex(int id) {
+        int cnt = 0;
+        for(Student std : list) {
+            if(id == std.getId()) {
+                break;
+            };
+            cnt++;
+        }
+        return cnt;
+    }
+
+
 
 
 

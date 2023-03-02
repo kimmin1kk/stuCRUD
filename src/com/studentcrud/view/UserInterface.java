@@ -2,8 +2,6 @@ package com.studentcrud.view;
 
 import com.studentcrud.service.StudentManager;
 import com.studentcrud.user.Student;
-import com.sun.istack.internal.NotNull;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -30,7 +28,18 @@ public class UserInterface {
         System.out.println();
         System.out.println("로그인 페이지입니다.");
         System.out.println("1. 학생 로그인 | 2. 관리자 로그인");
-        choose = Integer.parseInt(sc.nextLine());
+        while(true){
+            choose = getInput();
+            if (choose < 1) {
+                sc = new Scanner(System.in);
+                System.out.println("잘못된 입력입니다.");
+            }else if (choose > 2) {
+                sc = new Scanner(System.in);
+                System.out.println("잘못된 입력입니다.");
+            }else {
+                    break;
+            }
+        }
         return choose;
     }
     public int studentLogin() {
@@ -48,7 +57,7 @@ public class UserInterface {
         String check = null;int value=0;
         System.out.println("관리자 비밀번호를 입력해주세요. 취소하려면 cancel을 입력해주세요.");
         while(true) {
-            System.out.printf("입력 : ");
+            System.out.print("입력 : ");
             check = sc.nextLine();
             if(check.equals("admin1234")) {
                 System.out.println("관리자로 로그인합니다.");
@@ -74,10 +83,10 @@ public class UserInterface {
             System.out.println("-------------------------");
             System.out.println("| 학생 관리 시스템 (학생용) |");
             System.out.println("-----------------------------------");
-            System.out.println("| 1. 성적 열람 | 2 로그아웃 | 3. 종료 |");
+            System.out.println("| 1. 성적 열람 | 2 수정 | 3 로그아웃 | 4. 종료 |");
             System.out.println("-----------------------------------");
             try {
-                System.out.printf("값을 입력해주세요 : ");
+                System.out.print("값을 입력해주세요 : ");
                 num = sc.nextInt();
             }
             catch (InputMismatchException e) {
@@ -89,26 +98,65 @@ public class UserInterface {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
-            }else if (num > 3) {
+            }else if (num > 4) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
             }
             switch(num) {
                 case 1:
-                    System.out.println("입력을 선택하셨습니다.");break;
+                    System.out.println("성적 열람을 선택하셨습니다.");break;
                 case 2:
+                    System.out.println("수정을 선택하셨습니다.");break;
+                case 3:
                     System.out.println("로그아웃합니다.");
                     System.out.println("로그인 페이지로 넘어갑니다.");break;
-                case 3:
+                case 4:
                     System.out.println("학생 관리 시스템을 종료합니다.");break;
             }
             return num;
         }
         return num;
     }
-
-
+    public int replaceStudentInformation() {
+        Scanner sc = new Scanner(System.in);
+        int num = 0;
+        boolean onOff = true;
+        while (onOff) {
+            System.out.println("----------------");
+            System.out.println("| 학생 정보 수정 |");
+            System.out.println("--------------------------------------");
+            System.out.println("| 1. 이름 변경 | 2 비밀번호 변경 | 3 취소 |");
+            System.out.println("--------------------------------------");
+            try {
+                System.out.print("값을 입력해주세요 : ");
+                num = sc.nextInt();
+            } catch (InputMismatchException e) {
+                sc = new Scanner(System.in);
+                System.out.println("정수형만 입력할 수 있습니다.");
+                continue;
+            }
+            if (num < 1) {
+                sc = new Scanner(System.in);
+                System.out.println("잘못된 입력입니다.");
+                continue;
+            } else if (num > 3) {
+                sc = new Scanner(System.in);
+                System.out.println("잘못된 입력입니다.");
+                continue;
+            }
+            switch(num) {
+                case 1:
+                    System.out.println("이름 변경을 선택하셨습니다.");break;
+                case 2:
+                    System.out.println("비밀번호 변경을 선택하셨습니다.");break;
+                case 3:
+                    System.out.println("정보 수정을 취소합니다.");break;
+            }
+            return num;
+        }
+        return num;
+    }
     public int adminMainPage() {
         Scanner sc = new Scanner(System.in);
         boolean onOff=true;
@@ -120,7 +168,7 @@ public class UserInterface {
             System.out.println("| 1. 입력 | 2. 검색 | 3. 출력 | 4. 삭제 | 5. 로그아웃 | 6. 종료 |");
             System.out.println("------------------------------------------------------------");
             try {
-                System.out.printf("값을 입력해주세요 : ");
+                System.out.print("값을 입력해주세요 : ");
                 num = sc.nextInt();
             }
             catch (InputMismatchException e) {
@@ -158,6 +206,19 @@ public class UserInterface {
         }
         return num;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Student typeStudent() { //학생 데이터 입력받는 메소드
 //        Student student = new Student();
         StudentManager sm = StudentManager.getInstance();
@@ -183,20 +244,12 @@ public class UserInterface {
         kScore = getScore();
         System.out.print("영어 점수를 입력하세요 :");
         eScore = getScore();
-        System.out.print("수학 점수를 입력하세요");
+        System.out.print("수학 점수를 입력하세요 :");
         mScore = getScore();
         System.out.println("학생이 생성되었습니다. 초기 비밀번호는 학번과 동일합니다.");
         Student student = new Student(name, id, kScore, eScore, mScore);
         return student;
     };
-
-
-
-
-
-
-
-
 
     public int getScore() { //점수 입력할 때 예외처리해둔 메소드
         int a = 0;
@@ -209,12 +262,12 @@ public class UserInterface {
             catch (InputMismatchException e) {
                 sc = new Scanner(System.in);
                 System.out.println("정수형만 입력할 수 있습니다.");
-                System.out.printf("입력 : ");
+                System.out.print("입력 : ");
                 continue;
             }
             if(a < MIN_SCORE) {
                 System.out.println("최저 점수는 0점입니다. 다시 입력해주세요");
-                System.out.printf("입력 : ");
+                System.out.print("입력 : ");
                 sc = new Scanner(System.in);
             }else if(a > MAX_SCORE) {
                 System.out.println("최대 점수는 100점입니다. 다시 입력해주세요");
@@ -235,18 +288,18 @@ public class UserInterface {
                 a = Integer.parseInt(sc.nextLine());
             }catch(InputMismatchException e){
                 System.out.println("숫자만 입력하세요. (InputMismatchException 에러 발생");
-                System.out.printf("입력 : ");
+                System.out.print("입력 : ");
                 sc = new Scanner(System.in);
                 continue;
             }catch(NumberFormatException e){
                 System.out.println("숫자만 입력하세요. (NumberFormatException 에러 발생)");
-                System.out.printf("입력 : ");
+                System.out.print("입력 : ");
                 sc = new Scanner(System.in);
                 continue;
             }
                 if (a < 0) {
                 System.out.println("잘못된 접근입니다.");
-                System.out.printf("다시 입력 : ");
+                System.out.print("다시 입력 : ");
                 sc = new Scanner(System.in);
             }else {
                 break;
@@ -274,5 +327,19 @@ public class UserInterface {
 
     public void searchFailed(int search) {
         System.out.printf("학번 : %d와 일치하는 항목이 존재하지 않습니다.\n" , search);
+    }
+
+    public void replaceStudentName(Student student) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("수정할 이름을 입력해주세요 :");
+        String name = sc.nextLine();
+        student.setName(name);
+    }
+
+    public void replaceStudentPassword(Student student) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("수정할 비밀번호를 입력해주세요 :");
+        String pw = sc.nextLine();
+        student.setPw(pw);
     }
 }
