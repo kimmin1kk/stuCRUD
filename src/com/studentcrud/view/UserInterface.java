@@ -9,20 +9,20 @@ import static com.studentcrud.config.Configuration.MAX_SCORE;
 import static com.studentcrud.config.Configuration.MIN_SCORE;
 
 public class UserInterface {
-    public int inputId() {
+    public int inputId() { // 아이디를 입력하는 메서드
         int id = 0;
         System.out.print("학번을 입력하세요 :");
         id = getInput();
         return id;
     }
-    public String inputPw() {
+    public String inputPw() { // 비밀번호를 입력하는 메서드
         Scanner sc = new Scanner(System.in);
         String pw = null;
         System.out.print("비밀번호를 입력하세요 :");
         pw = sc.nextLine();
         return pw;
     }
-    public int loginPage() {
+    public int loginPage() { // 처음 화면을 켰을 때 ui 메서드
         Scanner sc = new Scanner(System.in);
         int choose = 0, num = 0;
         System.out.println();
@@ -42,17 +42,7 @@ public class UserInterface {
         }
         return choose;
     }
-    public int studentLogin() {
-        Scanner sc = new Scanner(System.in);
-        int checkId = 0;
-        System.out.println("학번(아이디)을 입력하세요");
-        checkId = getInput();int value=0;
-        //학번 입력을 해서 일치하는 데이터 있으면 그 인덱스 다 가져온채로 메인페이지로 넘어감
-        System.out.println();
-        studentMainPage();
-        return 1;
-    }
-    public int adminLogin() {
+    public int adminLogin() { // 어드민 로그인을 선택했을 때 ui 메서드
         Scanner sc = new Scanner(System.in);
         String check = null;int value=0;
         System.out.println("관리자 비밀번호를 입력해주세요. 취소하려면 cancel을 입력해주세요.");
@@ -75,7 +65,7 @@ public class UserInterface {
         return value;
     }
 
-    public int studentMainPage() {
+    public int studentMainPage() { // 학생으로 로그인 했을 때 ui 메서드
         Scanner sc = new Scanner(System.in);
         int num=0;
         boolean onOff= true;
@@ -118,7 +108,7 @@ public class UserInterface {
         }
         return num;
     }
-    public int replaceStudentInformation() {
+    public int replaceStudentInformation() { // 학생으로 로그인해서 수정을 선택했을 때 호출되는 ui 메서드
         Scanner sc = new Scanner(System.in);
         int num = 0;
         boolean onOff = true;
@@ -157,7 +147,7 @@ public class UserInterface {
         }
         return num;
     }
-    public int adminMainPage() {
+    public int adminMainPage() { // 어드민 로그인했을 때 ui 메서드
         Scanner sc = new Scanner(System.in);
         boolean onOff=true;
         int num=0;
@@ -207,26 +197,12 @@ public class UserInterface {
         return num;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public Student typeStudent() { //학생 데이터 입력받는 메소드
+    public Student typeStudent() { // 학생 데이터 입력받는 메소드
 //        Student student = new Student();
         StudentManager sm = StudentManager.getInstance();
         Scanner sc = new Scanner(System.in);
         String name;
         int id, kScore, eScore, mScore;
-
-
         System.out.print("이름을 입력하세요 :");
         name = sc.nextLine();
         while(true) {
@@ -251,7 +227,7 @@ public class UserInterface {
         return student;
     };
 
-    public int getScore() { //점수 입력할 때 예외처리해둔 메소드
+    public int getScore() { //점수 입력할 때 예외처리해둔 메서드
         int a = 0;
         Scanner sc = new Scanner(System.in);
         boolean onOff = true;
@@ -280,7 +256,7 @@ public class UserInterface {
         return a;
     }
 
-    public int getInput() { //정수형만 입력받을 수 있는 메소드
+    public int getInput() { //정수형만 입력받을 수 있는 메서드
         int a=0;
         Scanner sc = new Scanner(System.in);
         while(true) {
@@ -309,34 +285,33 @@ public class UserInterface {
     }
 
 
-    public void printStudent(Student student) {
+    public void printStudent(Student student) { //출력하는 메서드.
         System.out.println(makeStudentInfo(student));
     }
-
-    private String makeStudentInfo(Student student){
+    private String makeStudentInfo(Student student){ //인자로 받은 student 타입의 ArrayList 를 출력형식에 맞게 가공하는 메서드
         return "|이름 :" + student.getName() + " \t\t| 학번 :" + student.getId() + "\t\t| 국어:" + student.getkScore()+ " \t| 영어:" + student.geteScore()
                 + "\t| 수학:" + student.getmScore()+ "\t| 총점:" + (student.getkScore() + student.geteScore() + student.getmScore())+ "\t" +
                 "| 평균 :" + (student.getkScore() + student.geteScore() + student.getmScore()) / 3;
     }
 
-    public int findStudent() { //단순히 입력을 받는정도
+    public int findStudent() { // 단순히 입력을 받는 메서드
         System.out.print("학번을 입력해주세요 : ");
         int check = getInput();
         return check;
     }
 
-    public void searchFailed(int search) {
+    public void searchFailed(int search) { // 검색에 실패했을 때 호출되는 메서드
         System.out.printf("학번 : %d와 일치하는 항목이 존재하지 않습니다.\n" , search);
     }
 
-    public void replaceStudentName(Student student) {
+    public void replaceStudentName(Student student) { // 이름을 수정할 때 쓰는 메서드
         Scanner sc = new Scanner(System.in);
         System.out.print("수정할 이름을 입력해주세요 :");
         String name = sc.nextLine();
         student.setName(name);
     }
 
-    public void replaceStudentPassword(Student student) {
+    public void replaceStudentPassword(Student student) { // 비밀번호를 수정할 때 쓰는 메서드
         Scanner sc = new Scanner(System.in);
         System.out.print("수정할 비밀번호를 입력해주세요 :");
         String pw = sc.nextLine();

@@ -14,7 +14,7 @@ public class StudentManager { //학생관리와 관련된 기능
 
     private StudentManager() {}
 
-    public static StudentManager getInstance() {
+    public static StudentManager getInstance() { //싱글톤
         if(studentManager == null) {
             studentManager = new StudentManager();
         }
@@ -22,11 +22,11 @@ public class StudentManager { //학생관리와 관련된 기능
     }
     ArrayList<Student> list = new ArrayList<>();
     Student stu = new Student();
-    public void inputStudent(Student student) {
+    public void inputStudent(Student student) { // 입력받은 student ArrayList 를 리스트에 추가해주는 메서드
         UserInterface ui = new UserInterface();
         list.add(ui.typeStudent());
     }
-    public void searchStudent() { //검색할 때 쓰는거
+    public void searchStudent() { //검색할 때 쓰는 메서드
         UserInterface ui = new UserInterface();
         int search = ui.findStudent();
         Student findedStudent = null;
@@ -41,7 +41,7 @@ public class StudentManager { //학생관리와 관련된 기능
             ui.searchFailed(search);
         }
     }
-    public boolean studentExistenceTest (int id) { //중복 있으면 true 없으면 false 반환 입력할 때 쓰는 중
+    public boolean studentExistenceTest (int id) { //중복 있으면 true 없으면 false 반환 입력할 때 쓰는 메서드
         Student findedStudent = null;
         for(Student std : list) {
             if(id == std.getId()) {
@@ -54,7 +54,7 @@ public class StudentManager { //학생관리와 관련된 기능
             return false;
         }
     }
-    public boolean studentLogin(int id,String pw) { //입력 받은 인자로 로그인 하는 과정임
+    public boolean studentLogin(int id,String pw) { //입력 받은 인자로 로그인 하는 메서드
         Student findedStudent = null;
         for(Student std : list) {
             if(id==std.getId()) { //아이디 체크
@@ -82,13 +82,13 @@ public class StudentManager { //학생관리와 관련된 기능
             cnt ++;
         }
     }
-    public void printStudent() {
+    public void printStudent() { // 출력했을 때 쓰는 전체 리스트가 출력되는 메서드
         UserInterface ui = new UserInterface();
         for(Student std : list) {
             ui.printStudent(std);
         }
     }
-    public int findIndex(int id) {
+    public int findIndex(int id) { //입력받은 아이디로 인덱스를 찾아주는 메서드
         int cnt = 0;
         for(Student std : list) {
             if(id == std.getId()) {
