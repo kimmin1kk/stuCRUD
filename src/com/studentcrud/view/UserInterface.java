@@ -5,8 +5,7 @@ import com.studentcrud.user.Student;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.studentcrud.config.Configuration.MAX_SCORE;
-import static com.studentcrud.config.Configuration.MIN_SCORE;
+import static com.studentcrud.config.Configuration.*;
 
 public class UserInterface {
     public int inputId() { // 아이디를 입력하는 메서드
@@ -30,10 +29,10 @@ public class UserInterface {
         System.out.println("1. 학생 로그인 | 2. 관리자 로그인");
         while(true){
             choose = getInput();
-            if (choose < 1) {
+            if (choose < PREVENT_MINUS_N_ZERO) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
-            }else if (choose > 2) {
+            }else if (choose > INPUT_RANGE_LOGIN) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
             }else {
@@ -84,11 +83,11 @@ public class UserInterface {
                 System.out.println("정수형만 입력할 수 있습니다.");
                 continue;
             }
-            if (num < 1) {
+            if (num < PREVENT_MINUS_N_ZERO) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
-            }else if (num > 4) {
+            }else if (num > INPUT_RANGE_STUDENT_MAIN) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
@@ -126,11 +125,11 @@ public class UserInterface {
                 System.out.println("정수형만 입력할 수 있습니다.");
                 continue;
             }
-            if (num < 1) {
+            if (num < PREVENT_MINUS_N_ZERO) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
-            } else if (num > 3) {
+            } else if (num > INPUT_RANGE_STUDENT_MODIFY) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
@@ -166,11 +165,11 @@ public class UserInterface {
                 System.out.println("정수형만 입력할 수 있습니다.");
                 continue;
             }
-            if (num < 1) {
+            if (num < PREVENT_MINUS_N_ZERO) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
-            }else if (num > 6) {
+            }else if (num > INPUT_RANGE_ADMIN_MAIN) {
                 sc = new Scanner(System.in);
                 System.out.println("잘못된 입력입니다.");
                 continue;
@@ -198,7 +197,6 @@ public class UserInterface {
     }
 
     public Student typeStudent() { // 학생 데이터 입력받는 메소드
-//        Student student = new Student();
         StudentManager sm = StudentManager.getInstance();
         Scanner sc = new Scanner(System.in);
         String name;
@@ -210,7 +208,6 @@ public class UserInterface {
             id = getInput();
             if(sm.studentExistenceTest(id)) {
                 System.out.println("중복된 학번입니다. 다시 입력해주세요.");
-                continue;
             }
             else {
                 break;
@@ -240,6 +237,11 @@ public class UserInterface {
                 System.out.println("정수형만 입력할 수 있습니다.");
                 System.out.print("입력 : ");
                 continue;
+            }catch (NumberFormatException e) {
+                sc = new Scanner(System.in);
+                System.out.println("정수형만 입력할 수 있습니다.");
+                System.out.print("입력 : ");
+                continue;
             }
             if(a < MIN_SCORE) {
                 System.out.println("최저 점수는 0점입니다. 다시 입력해주세요");
@@ -247,7 +249,7 @@ public class UserInterface {
                 sc = new Scanner(System.in);
             }else if(a > MAX_SCORE) {
                 System.out.println("최대 점수는 100점입니다. 다시 입력해주세요");
-                System.out.println("입력 : ");
+                System.out.print("입력 : ");
                 sc = new Scanner(System.in);
             }else {
                 break;
@@ -273,7 +275,7 @@ public class UserInterface {
                 sc = new Scanner(System.in);
                 continue;
             }
-                if (a < 0) {
+                if (a < PREVENT_MINUS) {
                 System.out.println("잘못된 접근입니다.");
                 System.out.print("다시 입력 : ");
                 sc = new Scanner(System.in);

@@ -1,7 +1,5 @@
 package com.studentcrud.service;
 
-import com.studentcrud.service.StudentManager;
-import com.studentcrud.user.User;
 import com.studentcrud.user.Student;
 import com.studentcrud.view.UserInterface;
 
@@ -40,7 +38,7 @@ public class Client {
                 break;
         }
     }
-    public void adminMainPage() {
+    public void adminMainPage() { //어드민으로 로그인했을때 호출되는 메서드
         boolean onOff= true;
         while(onOff) {
             switch (ui.adminMainPage()) {
@@ -68,7 +66,7 @@ public class Client {
         }
 
     }
-    public void studentMainPage(Student student) {
+    public void studentMainPage(Student student) { //학생으로 로그인 했을때 호출되는 메서드
         boolean onOff= true;
         while(onOff) {
             switch(ui.studentMainPage()){
